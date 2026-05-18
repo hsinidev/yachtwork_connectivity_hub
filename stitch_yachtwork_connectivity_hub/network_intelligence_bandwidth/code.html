@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yacht-Work | Network Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#c5c6d2",
+                        "on-primary": "#0d2c6e",
+                        "surface-bright": "#343946",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#8f9090",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "background": "#0e131e",
+                        "primary-container": "#002366",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#272929",
+                        "on-secondary-fixed-variant": "#464747",
+                        "surface-container-lowest": "#090e19",
+                        "secondary-container": "#484949",
+                        "surface-tint": "#b3c5ff",
+                        "surface-container-low": "#171b27",
+                        "inverse-surface": "#dee2f2",
+                        "secondary": "#c6c6c6",
+                        "primary": "#b3c5ff",
+                        "on-tertiary": "#2f3131",
+                        "on-primary-fixed-variant": "#2a4386",
+                        "on-secondary-container": "#b8b8b8",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-surface": "#dee2f2",
+                        "surface-container-high": "#252a36",
+                        "surface": "#0e131e",
+                        "on-primary-fixed": "#00174a",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#2b303c",
+                        "outline": "#8e909c",
+                        "surface-variant": "#303541",
+                        "inverse-primary": "#435b9f",
+                        "on-background": "#dee2f2",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1b1f2b",
+                        "secondary-fixed": "#e3e2e2",
+                        "surface-dim": "#0e131e",
+                        "tertiary": "#c6c6c7",
+                        "surface-container-highest": "#303541",
+                        "on-primary-container": "#758dd5",
+                        "outline-variant": "#444650",
+                        "on-secondary": "#2f3131",
+                        "primary-fixed-dim": "#b3c5ff",
+                        "on-tertiary-fixed": "#1a1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "bento-gap": "16px",
+                        "margin": "32px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(14, 19, 30, 0.4);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .metallic-button {
+            background: linear-gradient(135deg, #c6c6c6 0%, #e3e2e2 50%, #c6c6c6 100%);
+            color: #0d2c6e;
+        }
+        .ping-emerald { box-shadow: 0 0 12px #10b981; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm flex justify-between items-center px-6 h-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">anchor</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Yacht-Work</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded" href="#">FLEET</a>
+<a class="text-primary font-bold font-label-caps text-label-caps hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded" href="#">ANALYTICS</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-bright/50 transition-colors px-3 py-2 rounded" href="#">SECURITY</a>
+</nav>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 ping-emerald"></span>
+<span class="font-label-caps text-label-caps text-primary">VPN: ACTIVE</span>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="h-full w-80 fixed left-0 top-0 z-[60] bg-surface-container-high/95 backdrop-blur-3xl border-r border-outline-variant/20 shadow-2xl hidden xl:flex flex-col p-6 gap-y-4 pt-24">
+<div class="flex items-center gap-4 mb-8">
+<img alt="Captain" class="w-12 h-12 rounded-lg object-cover border border-outline-variant/40" data-alt="A close-up portrait of a professional maritime captain in a crisp white uniform, set against the blurred background of a modern yacht bridge. The lighting is natural and sophisticated, emphasizing a clean and authoritative executive aesthetic. The color palette is dominated by whites, navys, and soft metallic grays, aligning with a premium corporate management atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKRPiX2eXexBvLMKY2k_GqEQKUv3EJWFgoRJr_EEaUgyDZwLVI7-viTtFFhcfq3rwLxX36J1tb8bRQzu6cHiL3fa746ZAwEe-Low_3_oIHUdTqrAuP_a738_-IlZwsSbfn3T06MuAg63Conv6Heg1eHKxYYQn5yGtpbR1ZMGbkGdxYCzOyAPVN0rA9JM6y7Vk4kS4YtrEl1QY_IPrDKN6BeRjHbIEXU8tsyFy7pP7eEdu9YdDlmZ2Y0yv3PC60vyxcmjN7cgLYhmQ"/>
+<div>
+<h3 class="text-body-md font-bold text-on-surface">Capt. Henderson</h3>
+<p class="text-label-caps text-on-surface-variant text-[10px]">M/Y SERENITY | ADMIN</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-xl">directions_boat</span>
+<span class="font-body-md">Fleet Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+<span class="font-body-md">Network Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary border-l-4 border-primary bg-primary-container/20 font-bold rounded-r-lg" href="#">
+<span class="material-symbols-outlined text-xl">insights</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">router</span>
+<span class="font-body-md">Hardware Health</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">payments</span>
+<span class="font-body-md">Service Plan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto glass-card p-4 rounded-xl border border-primary/20">
+<p class="text-label-caps text-primary mb-2">STARLINK PREMIUM</p>
+<div class="flex justify-between items-end">
+<span class="text-headline-md font-headline-md text-on-surface">284<span class="text-sm font-normal text-on-surface-variant ml-1">Mbps</span></span>
+<span class="material-symbols-outlined text-emerald-500">signal_cellular_4_bar</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-28 pb-24 px-6 xl:ml-80 min-h-screen max-w-[1440px] mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Throughput Analysis</h1>
+<p class="text-on-surface-variant font-body-md">Real-time network consumption across M/Y Serenity fleet nodes.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant/30 hover:bg-surface-bright/30 transition-all font-label-caps text-label-caps text-on-surface">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                    PDF REPORT
+                </button>
+<button class="metallic-button flex items-center gap-2 px-6 py-2 rounded-lg font-label-caps text-label-caps shadow-lg hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                    EXCEL EXPORT
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-bento-gap">
+<!-- Historical Throughput Graph -->
+<div class="col-span-12 lg:col-span-8 glass-card p-6 rounded-2xl flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">24H THROUGHPUT (Gbps)</h3>
+<div class="flex gap-2">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold">LIVE UPDATE</span>
+</div>
+</div>
+<div class="h-64 relative w-full flex items-end gap-1">
+<!-- Faux Graph Bars -->
+<div class="flex-1 bg-primary/20 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[55%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[70%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[45%]"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-[85%] border-t-2 border-primary"></div>
+<div class="flex-1 bg-primary/50 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[50%]"></div>
+<div class="flex-1 bg-primary/70 rounded-t h-[95%] border-t-2 border-primary"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[65%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[45%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[35%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[50%]"></div>
+<div class="flex-1 bg-primary/50 rounded-t h-[80%] border-t-2 border-primary"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[60%]"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-label-caps text-on-surface-variant opacity-50">
+<span>00:00</span>
+<span>04:00</span>
+<span>08:00</span>
+<span>12:00</span>
+<span>16:00</span>
+<span>20:00</span>
+<span>NOW</span>
+</div>
+</div>
+<!-- Categories Card -->
+<div class="col-span-12 lg:col-span-4 glass-card p-6 rounded-2xl">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-6">TRAFFIC CATEGORIES</h3>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">movie</span>Streaming</span>
+<span class="font-data-mono">42.8 GB</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary">security</span>Security</span>
+<span class="font-data-mono">12.4 GB</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[25%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-on-surface-variant">videocam</span>CCTV Video</span>
+<span class="font-data-mono">18.1 GB</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-on-surface-variant w-[40%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary">cloud</span>Cloud Sync</span>
+<span class="font-data-mono">5.2 GB</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Consuming Devices -->
+<div class="col-span-12 glass-card rounded-2xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">TOP CONSUMING DEVICES (CURRENT SESSION)</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-label-caps text-[10px] text-on-surface-variant">DOWNLOAD</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-label-caps text-[10px] text-on-surface-variant">UPLOAD</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-label-caps text-[11px] text-on-surface-variant border-b border-outline-variant/10">
+<th class="px-6 py-4 font-bold">DEVICE NAME</th>
+<th class="px-6 py-4 font-bold">IP ADDRESS</th>
+<th class="px-6 py-4 font-bold">STATUS</th>
+<th class="px-6 py-4 font-bold">BANDWIDTH USAGE</th>
+<th class="px-6 py-4 font-bold text-right">TOTAL DATA</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">desktop_windows</span>
+<div>
+<div class="font-bold">Bridge-Main-Nav</div>
+<div class="text-[10px] text-on-surface-variant">Workstation Alpha</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">192.168.1.104</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold">ACTIVE</span>
+</td>
+<td class="px-6 py-4 w-64">
+<div class="flex flex-col gap-1">
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 85%;"></div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 15%;"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-data-mono">12.8 GB</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">tv</span>
+<div>
+<div class="font-bold">Owner-Suite-TV</div>
+<div class="text-[10px] text-on-surface-variant">Apple TV 4K</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">192.168.1.210</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold">ACTIVE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 92%;"></div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 4%;"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-data-mono">8.4 GB</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+<div>
+<div class="font-bold">Crew-IPhone-14</div>
+<div class="text-[10px] text-on-surface-variant">Handheld-04</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">192.168.1.15</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[10px] font-bold">THROTTLED</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 30%;"></div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 25%;"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-data-mono">2.1 GB</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">router</span>
+<div>
+<div class="font-bold">NAS-Server-01</div>
+<div class="text-[10px] text-on-surface-variant">Storage Hub</div>
+</div>
+</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">192.168.1.50</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold">ACTIVE</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 10%;"></div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 88%;"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-data-mono">54.2 GB</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<footer class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container/90 backdrop-blur-2xl border-t border-outline-variant/20 shadow-lg flex justify-around items-center px-4 pb-6 pt-3">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl">speed</span>
+<span class="font-label-caps text-[10px] mt-1">Bandwidth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl">network_check</span>
+<span class="font-label-caps text-[10px] mt-1">Signal</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/30 rounded-xl px-4 py-1 scale-95">
+<span class="material-symbols-outlined text-2xl">insights</span>
+<span class="font-label-caps text-[10px] mt-1">Analytics</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-2xl">person_add</span>
+<span class="font-label-caps text-[10px] mt-1">Guest</span>
+</div>
+</footer>
+</body></html>

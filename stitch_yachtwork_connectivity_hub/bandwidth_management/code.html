@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(27, 31, 43, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .metallic-gradient {
+            background: linear-gradient(145deg, #C0C0C0 0%, #8E909C 100%);
+        }
+        .brushed-steel-border {
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .radial-glow-emerald {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #C0C0C0;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #002366;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#b8b8b8",
+                        "background": "#0e131e",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-container": "#002366",
+                        "error-container": "#93000a",
+                        "surface-dim": "#0e131e",
+                        "surface-container-highest": "#303541",
+                        "on-tertiary": "#2f3131",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-high": "#252a36",
+                        "on-background": "#dee2f2",
+                        "secondary-container": "#484949",
+                        "primary-fixed-dim": "#b3c5ff",
+                        "on-surface": "#dee2f2",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary": "#c6c6c7",
+                        "inverse-surface": "#dee2f2",
+                        "error": "#ffb4ab",
+                        "surface": "#0e131e",
+                        "surface-bright": "#343946",
+                        "surface-container": "#1b1f2b",
+                        "on-tertiary-container": "#8f9090",
+                        "on-primary-container": "#758dd5",
+                        "surface-container-low": "#171b27",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "secondary": "#c6c6c6",
+                        "on-primary-fixed-variant": "#2a4386",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-tint": "#b3c5ff",
+                        "surface-container-lowest": "#090e19",
+                        "outline-variant": "#444650",
+                        "secondary-fixed": "#e3e2e2",
+                        "primary": "#b3c5ff",
+                        "on-surface-variant": "#c5c6d2",
+                        "on-secondary": "#2f3131",
+                        "outline": "#8e909c",
+                        "inverse-on-surface": "#2b303c",
+                        "tertiary-container": "#272929",
+                        "on-primary": "#0d2c6e",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#00174a",
+                        "on-secondary-fixed-variant": "#464747",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "inverse-primary": "#435b9f",
+                        "surface-variant": "#303541",
+                        "on-tertiary-fixed-variant": "#454747"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "bento-gap": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "data-mono": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm flex justify-between items-center px-6 h-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="anchor">anchor</span>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Yacht-Work</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center mr-8">
+<span class="text-primary font-bold text-label-caps font-label-caps">Bandwidth</span>
+<span class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-2 py-1 rounded text-label-caps font-label-caps">Signal</span>
+<span class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-2 py-1 rounded text-label-caps font-label-caps">Analytics</span>
+<span class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors px-2 py-1 rounded text-label-caps font-label-caps">Guest</span>
+</div>
+<div class="px-3 py-1 bg-primary-container/20 border border-primary/30 rounded-full flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-400 radial-glow-emerald"></div>
+<span class="text-label-caps font-label-caps text-primary">VPN: ACTIVE</span>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden lg:flex h-full w-80 fixed left-0 top-0 z-[60] bg-surface-container-high/95 backdrop-blur-3xl border-r border-outline-variant/20 shadow-2xl flex-col h-full p-6 gap-y-4">
+<div class="flex items-center gap-4 mb-8 left_align">
+<div class="w-12 h-12 rounded-lg overflow-hidden border border-primary/20">
+<img alt="Executive Captain" class="w-full h-full object-cover" data-alt="A portrait of a confident yacht captain in his late 40s wearing a clean white executive maritime uniform. He is standing against the backdrop of a modern, high-tech bridge console with soft blue lighting. The overall mood is authoritative, professional, and sophisticated, reflecting the elite Yacht-Work brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3nsX8trHtXqED5ixmJMs1MmY3HNExounj5YlbQhplUxJ1V2uq2rvLToT7_pKrTenxGZNd9-7UMxtWocMbapLaqrIo3VF9zVE5_0oTBxrWrcT1muWmrMGanH_XULw57m4QMtBEFLvrHpl_fDE02l1W5vD7tX4udSIEll6kvKmfmkC_kMYu2URDXZPLavYrkL4fV6ZuthA2G6lqHXDZQ0ZMXQ9YMta-rDnr78BE0dHBMZS7AssUiGSoZbC8dpejR93oE1evVZsi2r0"/>
+</div>
+<div>
+<h3 class="text-body-md font-bold text-on-surface">Capt. Henderson</h3>
+<p class="text-xs text-on-surface-variant">M/Y Serenity • <span class="text-primary">Admin</span></p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="directions_boat">directions_boat</span>
+<span class="font-body-md">Fleet Dashboard</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-primary border-l-4 border-primary bg-primary-container/20 font-bold translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<span class="font-body-md">Bandwidth Management</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-body-md">Network Security</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="router">router</span>
+<span class="font-body-md">Hardware Health</span>
+</a>
+<a class="flex items-center gap-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="pt-24 pb-32 lg:pl-80 min-h-screen">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-margin">
+<!-- Hero Header Section -->
+<div class="mb-bento-gap flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="text-label-caps font-label-caps text-primary uppercase tracking-widest mb-2 block">System Command</span>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface">Network Traffic Control</h2>
+</div>
+<!-- PROMINENT BUTTON: Prioritize My Device -->
+<button class="metallic-gradient text-primary-container px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg hover:scale-[1.02] transition-all active:scale-95 group">
+<span class="material-symbols-outlined group-hover:animate-pulse" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-body-lg font-bold tracking-tight">PRIORITIZE MY DEVICE</span>
+</button>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-12 gap-bento-gap">
+<!-- Real-time Bandwidth Visualization -->
+<div class="col-span-12 lg:col-span-8 glass-panel rounded-xl p-6 flex flex-col justify-between min-h-[320px]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-label-caps font-label-caps text-on-surface-variant mb-1">AGGREGATE THROUGHPUT</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline-lg text-primary">284.5</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">MBPS</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-data-mono font-data-mono text-emerald-400">STARLINK_LINK_01: ACTIVE</span>
+<p class="text-xs text-on-surface-variant">Latency: 24ms</p>
+</div>
+</div>
+<!-- Placeholder for actual data viz visualization -->
+<div class="flex-1 w-full bg-surface-container-low/50 rounded-lg border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute inset-0 flex items-end">
+<div class="w-full h-2/3 bg-gradient-to-t from-primary/20 to-transparent flex items-end px-1 gap-1">
+<!-- Mock Bars -->
+<div class="flex-1 bg-primary/40 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/30 h-[45%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/50 h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[70%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/60 h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/50 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[65%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/60 h-[95%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/30 h-[40%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Link Status -->
+<div class="col-span-12 lg:col-span-4 glass-panel rounded-xl p-6">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant mb-6">LINK REDUNDANCY</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container/50 border border-primary/20 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="satellite_alt">satellite_alt</span>
+<div>
+<p class="text-sm font-bold">Starlink Maritime</p>
+<p class="text-xs text-on-surface-variant">Priority 1 • High Capacity</p>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-emerald-400 radial-glow-emerald"></div>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container/20 border border-outline-variant/10 rounded-lg opacity-60">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="cell_tower">cell_tower</span>
+<div>
+<p class="text-sm font-bold">5G Global Roam</p>
+<p class="text-xs text-on-surface-variant">Priority 2 • Standby</p>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"></div>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container/20 border border-outline-variant/10 rounded-lg opacity-60">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="router">router</span>
+<div>
+<p class="text-sm font-bold">Marina Wi-Fi</p>
+<p class="text-xs text-on-surface-variant">Priority 3 • Unavailable</p>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-error/50"></div>
+</div>
+</div>
+</div>
+<!-- Traffic Management Section (Main Task) -->
+<div class="col-span-12 glass-panel rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Traffic Category Allocation</h3>
+<p class="text-on-surface-variant text-sm mt-1">Adjust limits and priority for specific network protocols.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-xs font-bold border border-outline text-on-surface-variant rounded-lg hover:bg-surface-bright transition-colors">RESET DEFAULT</button>
+<button class="px-4 py-2 text-xs font-bold bg-primary-container text-primary rounded-lg hover:brightness-110 transition-all">SAVE CONFIG</button>
+</div>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<!-- Category: Video Calls -->
+<div class="p-6 flex flex-col md:flex-row items-center gap-8">
+<div class="w-full md:w-48 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="video_chat">video_chat</span>
+</div>
+<div>
+<p class="font-bold">Video Calls</p>
+<p class="text-xs text-on-surface-variant">Zoom, Teams, FaceTime</p>
+</div>
+</div>
+<div class="flex-1 w-full space-y-2">
+<div class="flex justify-between text-xs text-on-surface-variant mb-1 uppercase tracking-tighter font-bold">
+<span>Bandwidth Limit</span>
+<span class="text-primary">80 MBPS</span>
+</div>
+<input class="w-full h-1 bg-primary-container rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="80"/>
+</div>
+<div class="w-full md:w-32">
+<p class="text-[10px] text-on-surface-variant uppercase mb-1">Priority</p>
+<select class="bg-surface-container text-on-surface border-none rounded-lg text-sm w-full py-2 px-3 focus:ring-1 focus:ring-primary">
+<option>CRITICAL</option>
+<option selected="">HIGH</option>
+<option>MEDIUM</option>
+<option>LOW</option>
+</select>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Category: Security -->
+<div class="p-6 flex flex-col md:flex-row items-center gap-8">
+<div class="w-full md:w-48 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<div>
+<p class="font-bold">Security</p>
+<p class="text-xs text-on-surface-variant">CCTV, Sensors, Logs</p>
+</div>
+</div>
+<div class="flex-1 w-full space-y-2">
+<div class="flex justify-between text-xs text-on-surface-variant mb-1 uppercase tracking-tighter font-bold">
+<span>Bandwidth Limit</span>
+<span class="text-primary">UNLIMITED</span>
+</div>
+<input class="w-full h-1 bg-primary-container rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="100"/>
+</div>
+<div class="w-full md:w-32">
+<p class="text-[10px] text-on-surface-variant uppercase mb-1">Priority</p>
+<select class="bg-surface-container text-on-surface border-none rounded-lg text-sm w-full py-2 px-3 focus:ring-1 focus:ring-primary">
+<option selected="">CRITICAL</option>
+<option>HIGH</option>
+<option>MEDIUM</option>
+<option>LOW</option>
+</select>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" disabled="" type="checkbox"/>
+<div class="w-11 h-6 bg-primary opacity-50 rounded-full after:content-[''] after:absolute after:top-[2px] after:left-[22px] after:bg-white after:rounded-full after:h-5 after:w-5 cursor-not-allowed"></div>
+</label>
+</div>
+</div>
+<!-- Category: Streaming -->
+<div class="p-6 flex flex-col md:flex-row items-center gap-8">
+<div class="w-full md:w-48 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="movie">movie</span>
+</div>
+<div>
+<p class="font-bold">Streaming</p>
+<p class="text-xs text-on-surface-variant">Netflix, Plex, IPTV</p>
+</div>
+</div>
+<div class="flex-1 w-full space-y-2">
+<div class="flex justify-between text-xs text-on-surface-variant mb-1 uppercase tracking-tighter font-bold">
+<span>Bandwidth Limit</span>
+<span class="text-primary">120 MBPS</span>
+</div>
+<input class="w-full h-1 bg-primary-container rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="60"/>
+</div>
+<div class="w-full md:w-32">
+<p class="text-[10px] text-on-surface-variant uppercase mb-1">Priority</p>
+<select class="bg-surface-container text-on-surface border-none rounded-lg text-sm w-full py-2 px-3 focus:ring-1 focus:ring-primary">
+<option>CRITICAL</option>
+<option>HIGH</option>
+<option selected="">MEDIUM</option>
+<option>LOW</option>
+</select>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Category: Crew -->
+<div class="p-6 flex flex-col md:flex-row items-center gap-8">
+<div class="w-full md:w-48 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<div>
+<p class="font-bold">Crew</p>
+<p class="text-xs text-on-surface-variant">Messroom &amp; Personal Devices</p>
+</div>
+</div>
+<div class="flex-1 w-full space-y-2">
+<div class="flex justify-between text-xs text-on-surface-variant mb-1 uppercase tracking-tighter font-bold">
+<span>Bandwidth Limit</span>
+<span class="text-primary">25 MBPS</span>
+</div>
+<input class="w-full h-1 bg-primary-container rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="25"/>
+</div>
+<div class="w-full md:w-32">
+<p class="text-[10px] text-on-surface-variant uppercase mb-1">Priority</p>
+<select class="bg-surface-container text-on-surface border-none rounded-lg text-sm w-full py-2 px-3 focus:ring-1 focus:ring-primary">
+<option>CRITICAL</option>
+<option>HIGH</option>
+<option>MEDIUM</option>
+<option selected="">LOW</option>
+</select>
+</div>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container/90 backdrop-blur-2xl border-t border-outline-variant/20 shadow-lg flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/30 rounded-xl px-4 py-1 scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="speed">speed</span>
+<span class="text-label-caps font-label-caps text-[10px] mt-1">Bandwidth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="network_check">network_check</span>
+<span class="text-label-caps font-label-caps text-[10px] mt-1">Signal</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="insights">insights</span>
+<span class="text-label-caps font-label-caps text-[10px] mt-1">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person_add">person_add</span>
+<span class="text-label-caps font-label-caps text-[10px] mt-1">Guest</span>
+</a>
+</nav>
+</body></html>

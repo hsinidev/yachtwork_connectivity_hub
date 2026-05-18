@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yacht-Work | Network Infrastructure Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(14, 19, 30, 0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .metallic-button {
+            background: linear-gradient(135deg, #C0C0C0 0%, #8e909c 100%);
+            color: #0d2c6e;
+        }
+        .bento-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+        }
+        body {
+            background-color: #0e131e;
+            background-image: radial-gradient(circle at center, #1b1f2b 0%, #0e131e 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#c5c6d2",
+                      "on-primary": "#0d2c6e",
+                      "surface-bright": "#343946",
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#8f9090",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "secondary-fixed-dim": "#c6c6c6",
+                      "background": "#0e131e",
+                      "primary-container": "#002366",
+                      "error-container": "#93000a",
+                      "tertiary-container": "#272929",
+                      "on-secondary-fixed-variant": "#464747",
+                      "surface-container-lowest": "#090e19",
+                      "secondary-container": "#484949",
+                      "surface-tint": "#b3c5ff",
+                      "surface-container-low": "#171b27",
+                      "inverse-surface": "#dee2f2",
+                      "secondary": "#c6c6c6",
+                      "primary": "#b3c5ff",
+                      "on-tertiary": "#2f3131",
+                      "on-primary-fixed-variant": "#2a4386",
+                      "on-secondary-container": "#b8b8b8",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-surface": "#dee2f2",
+                      "surface-container-high": "#252a36",
+                      "surface": "#0e131e",
+                      "on-primary-fixed": "#00174a",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#dbe1ff",
+                      "inverse-on-surface": "#2b303c",
+                      "outline": "#8e909c",
+                      "surface-variant": "#303541",
+                      "inverse-primary": "#435b9f",
+                      "on-background": "#dee2f2",
+                      "error": "#ffb4ab",
+                      "surface-container": "#1b1f2b",
+                      "secondary-fixed": "#e3e2e2",
+                      "surface-dim": "#0e131e",
+                      "tertiary": "#c6c6c7",
+                      "surface-container-highest": "#303541",
+                      "on-primary-container": "#758dd5",
+                      "outline-variant": "#444650",
+                      "on-secondary": "#2f3131",
+                      "primary-fixed-dim": "#b3c5ff",
+                      "on-tertiary-fixed": "#1a1c1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "bento-gap": "16px",
+                      "margin": "32px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "data-mono": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "data-mono": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="text-on-surface font-body-md selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm flex justify-between items-center px-6 h-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="anchor">anchor</span>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Yacht-Work</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold font-label-caps text-label-caps flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                FLEET DASHBOARD
+            </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" data-icon="router">router</span>
+                INFRASTRUCTURE
+            </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps flex items-center gap-2" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+                SECURITY
+            </a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="px-3 py-1 rounded-full bg-primary-container/20 border border-primary/30">
+<span class="text-label-caps font-label-caps text-primary">VPN: ACTIVE</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="account_circle">account_circle</button>
+</div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="h-full w-80 fixed left-0 top-0 z-[60] bg-surface-container-high/95 backdrop-blur-3xl border-r border-outline-variant/20 shadow-2xl flex flex-col p-6 gap-y-4 hidden lg:flex">
+<div class="flex items-center gap-4 mb-8 left_align">
+<div class="w-12 h-12 rounded-xl bg-primary-container overflow-hidden border border-outline-variant/30">
+<img alt="Executive Captain" class="w-full h-full object-cover" data-alt="A portrait of a professional maritime captain in a white uniform standing on the bridge of a modern luxury yacht. The lighting is crisp and cinematic, emphasizing the authority and high-end setting. Soft blue tones from the console monitors illuminate his face, fitting a corporate dark-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGyKo5DnHUenn63vgX4MhBdfFhAMvJOr5ZMVwvHgtorQ7QCHNAkWjE_SGVf-jJpY5iH-eqjTmXiOIXHCmqOzGbdh77wV1n0Uk13BGEQ0Ns3Rf64Wq2gAf3cZ2aa-t749HVCNYa_p_dE5eN3y43TyPaxXDwpa7ih5kKxx_s-1b4jcfUYRnIOr3v7dkiFGotdrqY04aMg2qpwQfJtNctas3deGnf4qOQPNLJdO-FzFWGFM3O-MP0cBqfkGQE_g0Ih57PT8pRGrCrDnQ"/>
+</div>
+<div>
+<h3 class="text-body-md font-bold text-on-surface">Capt. Henderson</h3>
+<p class="text-xs text-on-surface-variant">M/Y Serenity | Admin</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="directions_boat">directions_boat</span>
+<span class="text-body-md">Fleet Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary border-l-4 border-primary bg-primary-container/20 font-bold translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="text-body-md">Network Security</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="router">router</span>
+<span class="text-body-md">Hardware Health</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-body-md">Service Plan</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-24 lg:pl-80 px-6 min-h-screen">
+<div class="max-w-[1440px] mx-auto">
+<!-- Hero / Title Section -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-2">Network Infrastructure</h2>
+<p class="text-on-surface-variant max-w-2xl">Real-time command of the M/Y Serenity's global connectivity suite. Manage hardware redundancy and allocate bandwidth with precision.</p>
+</div>
+<!-- Quick Action Toggle -->
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4 border-primary/30 border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
+<div>
+<p class="text-label-caps font-label-caps text-primary">PRIORITY MODE</p>
+<p class="text-xs text-on-surface">Prioritize My Device</p>
+</div>
+</div>
+<button class="w-12 h-6 bg-primary rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-on-primary rounded-full absolute right-1"></div>
+</button>
+</div>
+</div>
+<!-- Bento Grid -->
+<div class="bento-grid">
+<!-- Hardware Inventory (Span 8) -->
+<section class="col-span-12 lg:col-span-8 glass-panel p-6 rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="inventory_2">inventory_2</span>
+                            HARDWARE INVENTORY
+                        </h3>
+<span class="text-data-mono font-data-mono text-emerald-400 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            3 SYSTEMS ONLINE
+                        </span>
+</div>
+<div class="space-y-4">
+<!-- Starlink Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low/50 border border-outline-variant/10 rounded-lg hover:border-primary/40 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container/40 flex items-center justify-center rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="satellite_alt">satellite_alt</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Starlink Maritime</p>
+<p class="text-xs text-on-surface-variant">ID: SL-MAR-4492 • Active Array</p>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-data-mono font-data-mono text-primary">245 Mbps ↓</p>
+<p class="text-xs text-on-surface-variant">Latency: 34ms</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] rounded border border-emerald-500/20">MASTER</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Pepwave Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low/50 border border-outline-variant/10 rounded-lg hover:border-primary/40 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary-container/20 flex items-center justify-center rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-on-surface" data-icon="router">router</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Pepwave MAX BR1</p>
+<p class="text-xs text-on-surface-variant">ID: PW-CELL-091 • Dual SIM Hybrid</p>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-data-mono font-data-mono text-on-surface-variant">42 Mbps ↓</p>
+<p class="text-xs text-on-surface-variant">SIM 1: Active</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 bg-primary-container/20 text-primary text-[10px] rounded border border-primary/20">BACKUP</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- KVH Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low/50 border border-outline-variant/10 rounded-lg hover:border-primary/40 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary-container/20 flex items-center justify-center rounded-lg border border-outline-variant/30">
+<span class="material-symbols-outlined text-on-surface" data-icon="radar">radar</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">KVH TracPhone V30</p>
+<p class="text-xs text-on-surface-variant">ID: KVH-SAT-112 • Standby</p>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-data-mono font-data-mono text-on-surface-variant">-- Mbps</p>
+<p class="text-xs text-on-surface-variant">Status: Idle</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[10px] rounded border border-outline-variant/20">STANDBY</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Protocol Toggles (Span 4) -->
+<section class="col-span-12 lg:col-span-4 glass-panel p-6 rounded-xl border-error/20">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="shield">shield</span>
+                        SECURITY PROTOCOLS
+                    </h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-on-surface">AES-256 Encryption</p>
+<p class="text-xs text-on-surface-variant">End-to-end data tunnel</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-4 h-4 bg-on-primary rounded-full absolute right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-on-surface">Deep Packet Firewall</p>
+<p class="text-xs text-on-surface-variant">Threat detection &amp; prevention</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-4 h-4 bg-on-primary rounded-full absolute right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between opacity-50">
+<div>
+<p class="font-bold text-on-surface">Stealth Mode</p>
+<p class="text-xs text-on-surface-variant">Disable SSID broadcasting</p>
+</div>
+<div class="w-12 h-6 bg-surface-variant rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-4 h-4 bg-on-surface-variant rounded-full absolute left-1"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/20">
+<button class="w-full metallic-button py-3 rounded-lg font-bold text-xs font-label-caps flex items-center justify-center gap-2 shadow-lg">
+<span class="material-symbols-outlined text-sm" data-icon="lock_reset">lock_reset</span>
+                                ROTATE ACCESS KEYS
+                            </button>
+</div>
+</div>
+</section>
+<!-- Bandwidth Allocation (Span 12) -->
+<section class="col-span-12 glass-panel p-6 rounded-xl">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="data_usage">data_usage</span>
+                            BANDWIDTH ALLOCATION
+                        </h3>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Total Capacity</p>
+<p class="text-data-mono font-data-mono text-on-surface">1.0 Gbps Burst</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings_input_component">settings_input_component</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Guest Network -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-bold text-on-surface">Guest Network</p>
+<p class="text-xs text-on-surface-variant">Throttle: 25 Mbps</p>
+</div>
+<span class="text-data-mono font-data-mono text-primary">15%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary/40" style="width: 15%"></div>
+</div>
+<input class="w-full accent-primary bg-transparent appearance-none h-1 cursor-pointer" max="100" min="0" type="range" value="15"/>
+</div>
+<!-- Crew/Operational -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-bold text-on-surface">Operational</p>
+<p class="text-xs text-on-surface-variant">Unthrottled Bridge Access</p>
+</div>
+<span class="text-data-mono font-data-mono text-primary">35%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary/70" style="width: 35%"></div>
+</div>
+<input class="w-full accent-primary bg-transparent appearance-none h-1 cursor-pointer" max="100" min="0" type="range" value="35"/>
+</div>
+<!-- Owner/VIP -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-bold text-on-surface">Owner &amp; VIP</p>
+<p class="text-xs text-on-surface-variant">Priority 1 Tunneling</p>
+</div>
+<span class="text-data-mono font-data-mono text-primary">50%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 50%"></div>
+</div>
+<input class="w-full accent-primary bg-transparent appearance-none h-1 cursor-pointer" max="100" min="0" type="range" value="50"/>
+</div>
+</div>
+</section>
+<!-- Signal Map (Asymmetric Design Element) -->
+<section class="col-span-12 lg:col-span-12 glass-panel p-6 rounded-xl overflow-hidden relative min-h-[300px]">
+<div class="absolute inset-0 opacity-20 grayscale mix-blend-overlay">
+<img alt="World Map Network" class="w-full h-full object-cover" data-alt="A high-tech digital world map with glowing blue network nodes and interconnected lines representing satellite coverage. The style is dark and minimalist with a faint grid overlay, evoking the aesthetic of a military or high-end maritime command center. The lighting is low and atmospheric, emphasizing the global connectivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7jHnad4dynQv75woCVobOpjwtq-AaV8c5keovY577cDcvx5RuCOurN0QoEL7R_4GpaG2eV9tdkhXL-FPJ4RdAVY2Vi1ap2ytZeTfQL-3U9mYACMoa-OfDtm---SAdm_0spOHjmJY_zIOqpakUxxvfMBO-IJyQNnE_zuUhjsIqJGaZ0aRxVtRiLuT5QLzkLqnt2HMxmmTh653OXHXqtBGjHjUXPnB6MqWA1vfgZGescdGFldR2pr_Kmc2AoY8TSOoQEBpAlqFW36o"/>
+</div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+                                GLOBAL CONNECTIVITY MAP
+                            </h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container rounded-lg text-xs border border-outline-variant/30">LAT: 25.7617° N</span>
+<span class="px-3 py-1 bg-surface-container rounded-lg text-xs border border-outline-variant/30">LONG: 80.1918° W</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-center justify-center mt-12">
+<div class="flex flex-col items-center">
+<div class="w-32 h-32 rounded-full border-4 border-primary/20 flex items-center justify-center relative">
+<div class="absolute inset-0 rounded-full border-t-4 border-primary animate-spin" style="animation-duration: 3s;"></div>
+<span class="text-headline-md font-data-mono text-primary">98%</span>
+</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mt-4">SIGNAL STRENGTH</p>
+</div>
+<div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+<div class="p-4 bg-surface-container-low/40 rounded-lg border border-outline-variant/20">
+<p class="text-xs text-on-surface-variant">Uplink</p>
+<p class="text-xl font-bold text-on-surface">12.4 GB</p>
+</div>
+<div class="p-4 bg-surface-container-low/40 rounded-lg border border-outline-variant/20">
+<p class="text-xs text-on-surface-variant">Downlink</p>
+<p class="text-xl font-bold text-on-surface">156.9 GB</p>
+</div>
+<div class="p-4 bg-surface-container-low/40 rounded-lg border border-outline-variant/20">
+<p class="text-xs text-on-surface-variant">Active IPs</p>
+<p class="text-xl font-bold text-on-surface">42</p>
+</div>
+<div class="p-4 bg-surface-container-low/40 rounded-lg border border-outline-variant/20">
+<p class="text-xs text-on-surface-variant">Uptime</p>
+<p class="text-xl font-bold text-on-surface">12d 4h</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface-container/90 backdrop-blur-2xl border-t border-outline-variant/20 shadow-lg flex justify-around items-center px-4 pb-6 pt-3">
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/30 rounded-xl px-4 py-1 scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-2xl" data-icon="speed">speed</span>
+<span class="text-label-caps font-label-caps">Bandwidth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-2xl" data-icon="network_check">network_check</span>
+<span class="text-label-caps font-label-caps">Signal</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-2xl" data-icon="insights">insights</span>
+<span class="text-label-caps font-label-caps">Analytics</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-2xl" data-icon="person_add">person_add</span>
+<span class="text-label-caps font-label-caps">Guest</span>
+</div>
+</nav>
+</body></html>

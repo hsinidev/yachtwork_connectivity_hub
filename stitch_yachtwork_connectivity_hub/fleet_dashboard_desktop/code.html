@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yacht-Work Fleet Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(27, 31, 43, 0.4);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(192, 192, 192, 0.1);
+        }
+        .metallic-button {
+            background: linear-gradient(135deg, #c0c0c0 0%, #8e909c 100%);
+            color: #0d2c6e;
+        }
+        .status-glow-emerald { box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+        .status-glow-crimson { box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        .status-glow-amber { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#c5c6d2",
+                      "on-primary": "#0d2c6e",
+                      "surface-bright": "#343946",
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#8f9090",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "secondary-fixed-dim": "#c6c6c6",
+                      "background": "#0e131e",
+                      "primary-container": "#002366",
+                      "error-container": "#93000a",
+                      "tertiary-container": "#272929",
+                      "on-secondary-fixed-variant": "#464747",
+                      "surface-container-lowest": "#090e19",
+                      "secondary-container": "#484949",
+                      "surface-tint": "#b3c5ff",
+                      "surface-container-low": "#171b27",
+                      "inverse-surface": "#dee2f2",
+                      "secondary": "#c6c6c6",
+                      "primary": "#b3c5ff",
+                      "on-tertiary": "#2f3131",
+                      "on-primary-fixed-variant": "#2a4386",
+                      "on-secondary-container": "#b8b8b8",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-surface": "#dee2f2",
+                      "surface-container-high": "#252a36",
+                      "surface": "#0e131e",
+                      "on-primary-fixed": "#00174a",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#dbe1ff",
+                      "inverse-on-surface": "#2b303c",
+                      "outline": "#8e909c",
+                      "surface-variant": "#303541",
+                      "inverse-primary": "#435b9f",
+                      "on-background": "#dee2f2",
+                      "error": "#ffb4ab",
+                      "surface-container": "#1b1f2b",
+                      "secondary-fixed": "#e3e2e2",
+                      "surface-dim": "#0e131e",
+                      "tertiary": "#c6c6c7",
+                      "surface-container-highest": "#303541",
+                      "on-primary-container": "#758dd5",
+                      "outline-variant": "#444650",
+                      "on-secondary": "#2f3131",
+                      "primary-fixed-dim": "#b3c5ff",
+                      "on-tertiary-fixed": "#1a1c1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "bento-gap": "16px",
+                      "margin": "32px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "data-mono": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "data-mono": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen overflow-x-hidden">
+<!-- Navigation Drawer (SideNav) -->
+<aside class="h-full w-80 fixed left-0 top-0 z-[60] bg-surface-container-high/95 backdrop-blur-3xl border-r border-outline-variant/20 shadow-2xl flex flex-col h-full p-6 gap-y-4 hidden lg:flex">
+<div class="flex items-center gap-x-3 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">anchor</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">Yacht-Work</span>
+</div>
+<div class="flex items-center gap-x-4 mb-10 p-4 rounded-xl bg-surface-container-highest/30">
+<img alt="Executive Captain" class="w-12 h-12 rounded-full border-2 border-primary/20" data-alt="A professional headshot of a seasoned maritime captain in formal white naval attire. The portrait is taken in high-key studio lighting with a soft blue tint to match a luxury corporate aesthetic. He has a composed, authoritative expression, conveying deep expertise and reliability in a premium fleet management context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv3nihGFPnpGIN7N3o91hvUx2P_0871wpkFk4J1yq9v6ZWohzqNWMQOr4EleC8ZUugD_q4h2HfivIWkZM_Nd0yBCigbJt0ZKEqNRhLtFiOWlrz6s9Pq4A4NhxU9miypLtQyv4PR8cDwxVgroyF6IYGQPzBdREWvuv3KjFnaJKuT1CJMJSNXgyeWNkQdutq1EkcJ4uxCCxiTUa7YfdnlyzkwupV52KXA12QBtibHa4jocV1bEGNFc-rS5tHIbk2qXENasRZqLWILWo"/>
+<div class="flex flex-col">
+<span class="text-body-md font-bold text-on-surface">Capt. Henderson</span>
+<span class="text-label-caps text-on-surface-variant">M/Y Serenity</span>
+</div>
+<span class="ml-auto text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded font-bold uppercase tracking-widest">Admin</span>
+</div>
+<nav class="flex flex-col gap-y-2">
+<a class="flex items-center gap-x-4 px-4 py-3 text-primary border-l-4 border-primary bg-primary-container/20 font-bold translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">directions_boat</span>
+<span class="text-body-md font-body-md">Fleet Dashboard</span>
+</a>
+<a class="flex items-center gap-x-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="text-body-md font-body-md">Network Security</span>
+</a>
+<a class="flex items-center gap-x-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">router</span>
+<span class="text-body-md font-body-md">Hardware Health</span>
+</a>
+<a class="flex items-center gap-x-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-body-md font-body-md">Service Plan</span>
+</a>
+<a class="flex items-center gap-x-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors mt-12" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-80 min-h-screen p-8 pb-32 lg:pb-8">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-20 w-full mb-8 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm rounded-xl">
+<div class="flex items-center gap-x-4">
+<span class="material-symbols-outlined text-primary">anchor</span>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Fleet Dashboard</h1>
+</div>
+<div class="flex items-center gap-x-6">
+<div class="flex items-center gap-x-2 px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="text-label-caps">VPN: ACTIVE</span>
+</div>
+<div class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</div>
+</div>
+</header>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-bento-gap max-w-container-max mx-auto">
+<!-- Global Throughput Visualization (Large Card) -->
+<section class="md:col-span-8 glass-panel rounded-xl p-6 flex flex-col justify-between">
+<div>
+<h3 class="text-label-caps text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">monitoring</span>
+                        GLOBAL THROUGHPUT
+                    </h3>
+<div class="flex items-baseline gap-x-4 mb-6">
+<span class="text-headline-lg font-headline-lg text-primary tracking-tighter">842.5 <span class="text-body-lg font-normal text-on-surface-variant">Mbps</span></span>
+<span class="text-emerald-400 text-data-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                            +12.4%
+                        </span>
+</div>
+</div>
+<div class="h-48 w-full bg-surface-container-highest/20 rounded-lg flex items-end gap-1 px-2 pb-2 overflow-hidden">
+<!-- Simulated Data Viz Bars -->
+<div class="bg-primary/40 w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-primary/50 w-full h-[75%] rounded-t-sm"></div>
+<div class="bg-primary/60 w-full h-[65%] rounded-t-sm"></div>
+<div class="bg-primary/40 w-full h-[85%] rounded-t-sm"></div>
+<div class="bg-primary/70 w-full h-[95%] rounded-t-sm"></div>
+<div class="bg-primary/50 w-full h-[80%] rounded-t-sm"></div>
+<div class="bg-primary/60 w-full h-[70%] rounded-t-sm"></div>
+<div class="bg-primary/40 w-full h-[90%] rounded-t-sm"></div>
+<div class="bg-primary/80 w-full h-full rounded-t-sm"></div>
+<div class="bg-primary/60 w-full h-[85%] rounded-t-sm"></div>
+<div class="bg-primary/50 w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-primary/70 w-full h-[75%] rounded-t-sm"></div>
+</div>
+</section>
+<!-- VPN 'Privacy-Tunnel' Status -->
+<section class="md:col-span-4 glass-panel rounded-xl p-6 flex flex-col justify-center items-center text-center">
+<div class="relative mb-6">
+<div class="w-24 h-24 rounded-full border-4 border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings: 'FILL' 1;">vpn_lock</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full border-4 border-surface status-glow-emerald"></div>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-1">Privacy-Tunnel</h3>
+<p class="text-on-surface-variant text-body-md mb-6">AES-256 GCM Encrypted</p>
+<div class="w-full bg-surface-container-highest/40 rounded-lg p-3 text-left">
+<div class="flex justify-between mb-2">
+<span class="text-label-caps text-on-surface-variant">Server</span>
+<span class="text-data-mono">Geneva_V4</span>
+</div>
+<div class="flex justify-between">
+<span class="text-label-caps text-on-surface-variant">IP</span>
+<span class="text-data-mono">45.22.181.9</span>
+</div>
+</div>
+</section>
+<!-- Active Alerts Feed (Tall Card) -->
+<section class="md:col-span-4 glass-panel rounded-xl p-6 flex flex-col">
+<h3 class="text-label-caps text-on-surface-variant mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">warning</span>
+                    ACTIVE ALERTS
+                </h3>
+<div class="flex flex-col gap-y-4">
+<div class="p-4 rounded-xl bg-error-container/10 border border-error-container/20 flex gap-x-4">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">wifi_off</span>
+<div>
+<p class="text-body-md font-bold text-on-surface">Starlink Throttling</p>
+<p class="text-label-caps text-on-surface-variant">Heavy Congestion Zone</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-highest/40 border border-outline-variant/20 flex gap-x-4">
+<span class="material-symbols-outlined text-amber-500" style="font-variation-settings: 'FILL' 1;">thermostat</span>
+<div>
+<p class="text-body-md font-bold text-on-surface">Bridge Router Temp</p>
+<p class="text-label-caps text-on-surface-variant">Elevated: 74°C</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-highest/40 border border-outline-variant/20 flex gap-x-4 opacity-60">
+<span class="material-symbols-outlined text-on-surface-variant">settings_backup_restore</span>
+<div>
+<p class="text-body-md font-bold text-on-surface">Firmware Pending</p>
+<p class="text-label-caps text-on-surface-variant">V2.4.1 Scheduled 02:00</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Network Reset Command (CTA Card) -->
+<section class="md:col-span-4 glass-panel rounded-xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<h3 class="text-label-caps text-on-surface-variant mb-4">SYSTEM RECOVERY</h3>
+<div class="mb-6">
+<span class="material-symbols-outlined text-6xl text-primary-container">power_settings_new</span>
+</div>
+<div>
+<h4 class="text-headline-md font-headline-md mb-2">One-Tap Reset</h4>
+<p class="text-body-md text-on-surface-variant mb-8 px-4">Force re-synchronization of all active Starlink &amp; Peplink arrays.</p>
+</div>
+<button class="metallic-button w-full py-4 rounded-xl font-bold tracking-widest text-label-caps active:scale-95 transition-transform">
+                    INITIATE GLOBAL RESET
+                </button>
+</section>
+<!-- Hardware Health Summary -->
+<section class="md:col-span-4 glass-panel rounded-xl p-6">
+<h3 class="text-label-caps text-on-surface-variant mb-6">HARDWARE HEALTH</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low/50 p-4 rounded-lg border border-outline-variant/10">
+<span class="text-label-caps text-on-surface-variant block mb-2">Array A</span>
+<div class="flex items-center justify-between">
+<span class="text-headline-md font-headline-md text-emerald-400">98%</span>
+<span class="material-symbols-outlined text-emerald-400 text-sm">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-lg border border-outline-variant/10">
+<span class="text-label-caps text-on-surface-variant block mb-2">Array B</span>
+<div class="flex items-center justify-between">
+<span class="text-headline-md font-headline-md text-emerald-400">94%</span>
+<span class="material-symbols-outlined text-emerald-400 text-sm">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-lg border border-outline-variant/10">
+<span class="text-label-caps text-on-surface-variant block mb-2">Internal</span>
+<div class="flex items-center justify-between">
+<span class="text-headline-md font-headline-md text-on-surface">100%</span>
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-lg border border-outline-variant/10">
+<span class="text-label-caps text-on-surface-variant block mb-2">Uptime</span>
+<div class="flex items-center justify-between">
+<span class="text-headline-md font-headline-md text-on-surface">14d</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">schedule</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface-container/90 backdrop-blur-2xl border-t border-outline-variant/20 shadow-lg flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/30 rounded-xl px-4 py-1 scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">speed</span>
+<span class="text-label-caps mt-1">Bandwidth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">network_check</span>
+<span class="text-label-caps mt-1">Signal</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">insights</span>
+<span class="text-label-caps mt-1">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined text-2xl">person_add</span>
+<span class="text-label-caps mt-1">Guest</span>
+</a>
+</nav>
+<!-- Contextual FAB (Dashboard relevant) -->
+<button class="fixed bottom-10 right-10 z-[70] md:flex hidden bg-primary text-on-primary p-5 rounded-full shadow-2xl hover:scale-105 transition-transform active:scale-95 items-center justify-center">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add_chart</span>
+</button>
+</body></html>
